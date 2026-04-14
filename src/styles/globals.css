@@ -1,0 +1,401 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════
+   @property — Animated Custom Properties
+   ═══════════════════════════════════════════ */
+@property --gradient-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --glow-opacity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* ═══════════════════════════════════════════
+   @layer base — Reset & Root Variables
+   ═══════════════════════════════════════════ */
+@layer base {
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text: #000000;
+    --text-secondary: #111111;
+    --border: #e5e5e5;
+    --muted: #888888;
+    --card-bg: #f5f5f5;
+    --card-border: #e5e5e5;
+    --nav-bg: rgba(255, 255, 255, 0.7);
+    --nav-border: rgba(0, 0, 0, 0.08);
+    --scrollbar-thumb: #cccccc;
+  }
+
+  .dark {
+    --bg: #000000;
+    --bg-secondary: #111111;
+    --text: #ffffff;
+    --text-secondary: #f5f5f5;
+    --border: #222222;
+    --muted: #888888;
+    --card-bg: #111111;
+    --card-border: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(0, 0, 0, 0.6);
+    --nav-border: rgba(255, 255, 255, 0.06);
+    --scrollbar-thumb: #333333;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(136, 136, 136, 0.3);
+    color: var(--text);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   @layer components — Reusable Components
+   ═══════════════════════════════════════════ */
+@layer components {
+  .glassmorphism {
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--nav-border);
+  }
+
+  .gradient-border {
+    background: conic-gradient(from var(--gradient-angle), #fff, #888, #fff, #888, #fff);
+    animation: borderRotate 3s linear infinite;
+    padding: 2px;
+    border-radius: 50%;
+  }
+
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  @media (min-width: 768px) {
+    .section-container {
+      padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 2rem);
+    }
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    color: var(--muted);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    margin-bottom: 3rem;
+  }
+
+  .card-base {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+  }
+
+  .card-base:hover {
+    border-color: color-mix(in srgb, var(--text) 20%, transparent);
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    min-height: 48px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    min-height: 48px;
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--text);
+    transform: translateY(-2px);
+  }
+
+  .shimmer-btn {
+    background-size: 200% 100%;
+    background-image: linear-gradient(
+      110deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 75%
+    );
+    animation: shimmer 3s linear infinite;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   @layer utilities — Utility Classes
+   ═══════════════════════════════════════════ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Keyframes
+   ═══════════════════════════════════════════ */
+@keyframes borderRotate {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glitch {
+  0%, 100% { text-shadow: -2px 0 #888, 2px 0 #555; transform: translate(0); }
+  20% { text-shadow: 2px 0 #888, -2px 0 #555; }
+  40% { text-shadow: -2px -2px #888, 2px 2px #555; transform: translate(-1px, 1px); }
+  60% { text-shadow: 2px 2px #888, -2px -2px #555; transform: translate(1px, -1px); }
+  80% { text-shadow: -1px 1px #888, 1px -1px #555; transform: translate(0); }
+}
+
+@keyframes glitchLight {
+  0%, 100% { text-shadow: -2px 0 #ccc, 2px 0 #aaa; transform: translate(0); }
+  20% { text-shadow: 2px 0 #ccc, -2px 0 #aaa; }
+  40% { text-shadow: -2px -2px #ccc, 2px 2px #aaa; transform: translate(-1px, 1px); }
+  60% { text-shadow: 2px 2px #ccc, -2px -2px #aaa; transform: translate(1px, -1px); }
+  80% { text-shadow: -1px 1px #ccc, 1px -1px #aaa; transform: translate(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes scrollProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ═══════════════════════════════════════════
+   Dot Grid Background
+   ═══════════════════════════════════════════ */
+.dot-grid-bg {
+  background-image: radial-gradient(circle, var(--muted) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════
+   Glitch Effect
+   ═══════════════════════════════════════════ */
+.glitch-text {
+  animation: glitch 2.5s infinite;
+  position: relative;
+}
+
+.dark .glitch-text {
+  animation-name: glitch;
+}
+
+:root .glitch-text {
+  animation-name: glitchLight;
+}
+
+/* ═══════════════════════════════════════════
+   Scroll Progress Bar
+   ═══════════════════════════════════════════ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--text);
+  transform-origin: left;
+  z-index: 100;
+  animation: scrollProgress auto linear;
+  animation-timeline: scroll();
+}
+
+/* ═══════════════════════════════════════════
+   Cursor Glow (Desktop Only)
+   ═══════════════════════════════════════════ */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: soft-light;
+}
+
+.dark .cursor-glow {
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+}
+
+:root:not(.dark) .cursor-glow {
+  background: radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 70%);
+}
+
+/* ═══════════════════════════════════════════
+   Timeline Styles
+   ═══════════════════════════════════════════ */
+.timeline-line {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--border), var(--muted), var(--border));
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 2px solid var(--bg);
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════
+   Form :has() Selector
+   ═══════════════════════════════════════════ */
+.contact-form:has(input:focus),
+.contact-form:has(textarea:focus) {
+  border-color: color-mix(in srgb, var(--text) 30%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--text) 5%, transparent);
+}
+
+/* ═══════════════════════════════════════════
+   Container Queries for Cards
+   ═══════════════════════════════════════════ */
+@container (max-width: 300px) {
+  .project-card-inner {
+    padding: 1rem;
+  }
+  .project-card-inner h3 {
+    font-size: 1rem;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Mobile Overrides
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .cursor-glow {
+    display: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Skill Badge Hover
+   ═══════════════════════════════════════════ */
+.skill-icon:hover {
+  --glow-opacity: 1;
+  box-shadow: 0 0 25px color-mix(in srgb, var(--text) 15%, transparent);
+}
+
+/* ═══════════════════════════════════════════
+   Dark Mode Icon Fixes
+   ═══════════════════════════════════════════ */
+.dark .devicon-nextjs-plain,
+.dark .devicon-github-original,
+.dark .devicon-linux-plain {
+  filter: invert(1);
+}
