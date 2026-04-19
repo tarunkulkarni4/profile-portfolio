@@ -95,7 +95,14 @@ export const projects = [
     tags: ["JavaScript", "Chrome APIs", "HTML", "CSS"],
     github: "https://github.com/tarunkulkarni4/applymate-chrome-extension",
   },
-
+  {
+    title: "TalentFlow AI — HR Screening Dashboard",
+    description:
+      "AI-powered recruitment platform with automated screening phone interviews via Bolna AI, Groq (Llama-3) resume parsing, and smart call scheduling.",
+    tags: ["Next.js", "Node.js", "Bolna AI", "Tailwind CSS", "MongoDB"],
+    github: "https://github.com/tarunkulkarni4/hr-screening-web-app",
+    live: "https://github.com/tarunkulkarni4/hr-screening-web-app",
+  },
 ];
 
 export const education = [
