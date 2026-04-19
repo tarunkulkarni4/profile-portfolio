@@ -46,7 +46,7 @@ export const projects = [
       "Automates job applications by extracting job details via OCR, generating tailored cover emails via Grok AI, and auto-drafting them using the Gmail API.",
     tags: ["React", "Node.js", "Express", "Tailwind CSS", "AI"],
     github: "https://github.com/tarunkulkarni4/auto-email",
-    live: "https://github.com/tarunkulkarni4/auto-email", // Re-using github link; user can update live Vercel/Render link if needed
+    live: "https://auto-email-ebon.vercel.app/",
   },
   {
     title: "Negotiation E-Commerce Platform",
