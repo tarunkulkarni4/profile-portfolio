@@ -41,6 +41,14 @@ export const projects = [
     live: "https://ai-powered-google-form-builder-demo.vercel.app/",
   },
   {
+    title: "AI Job Application Automator",
+    description:
+      "Automates job applications by extracting job details via OCR, generating tailored cover emails via Grok AI, and auto-drafting them using the Gmail API.",
+    tags: ["React", "Node.js", "Express", "Tailwind CSS", "AI"],
+    github: "https://github.com/tarunkulkarni4/auto-email",
+    live: "https://github.com/tarunkulkarni4/auto-email", // Re-using github link; user can update live Vercel/Render link if needed
+  },
+  {
     title: "Negotiation E-Commerce Platform",
     description:
       "Real-time price negotiation platform between buyer and seller with Socket.io, authentication, and integrated payment system.",
